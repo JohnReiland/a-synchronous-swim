@@ -18,13 +18,18 @@ module.exports.backgroundImageFile = path.join('.', 'background.jpg');
 // Step 3: Refactor the server program so that instead of responding with random commands, the user's directional keypresses and typed commands from the server terminal are sent in response. Keep your tests passing so be sure to update previously written test(s) to match this change.
 
 module.exports.router = (req, res, next = ()=>{}) => {
-  console.log('Serving request type ' + req.method + ' for url ' + req.url);
+  //console.log('Serving request type ' + req.method + ' for url ' + req.url);
 
     if (req.method === 'GET') {
       if (req.url === '/') {
         res.writeHead(200, headers); //The request has succeeded. The information returned with the response is dependent on the method used in the request
-        res.end(messageQueue.dequeue);
-      } else if (req.url === )
+
+        res.end();
+        // res.end(generateRandom());
+      }// else if (req.url === '/?command=random') {
+      //   res.writeHead(200, headers); //The request has succeeded. The information returned with the response is dependent on the method used in the request
+      //   res.end(generateRandom());
+      // }
 
     }
     if (req.method === 'OPTIONS') {
@@ -32,10 +37,10 @@ module.exports.router = (req, res, next = ()=>{}) => {
         res.end();
     }
 
+    next(); // invoke next() at the end of a request to help with testing!
   };
-  next(); // invoke next() at the end of a request to help with testing!
 
-            // if (req.url === '/') {
+      // if (req.url === '/') {
       //   res.writeHead(200, headers);
       //   res.end(messageQueue.dequeue());
       // }
@@ -63,8 +68,8 @@ module.exports.router = (req, res, next = ()=>{}) => {
   //};
 
 
-  // var generateRandom = () => {
-  // var options = ['up', 'down', 'left', 'right'];
-  // var i = Math.floor(Math.random() * 4);
-  // return options[i];
-// };
+  var generateRandom = () => {
+  var options = ['up', 'down', 'left', 'right'];
+  var i = Math.floor(Math.random() * 4);
+  return options[i];
+};

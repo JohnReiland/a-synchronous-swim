@@ -6,16 +6,25 @@
   // TODO: build the swim command fetcher here
   //
 
-  const ajax_TEMP_FetchSwimCommand = () => {
+  $(document).ready(function(){
+    setInterval(fetchSwimCommand, 250);
+    }//ready function will be executed after document elements are loaded.
+   );
+
+
+
+  const fetchSwimCommand = () => {
     $.ajax({
       type: 'GET',
       url: serverUrl,
       success: (res) => {
         // window.location = window.location.href;
-      SwimTeam.move(JSON.stringify(res))
+      SwimTeam.move(res)
       }
    });
-  }
+  };
+
+
 
   // alert(res.end);
 
