@@ -6,6 +6,19 @@
   // TODO: build the swim command fetcher here
   //
 
+  const ajax_TEMP_FetchSwimCommand = () => {
+    $.ajax({
+      type: 'GET',
+      url: serverUrl,
+      success: (res) => {
+        // window.location = window.location.href;
+      SwimTeam.move(JSON.stringify(res))
+      }
+   });
+  }
+
+  // alert(res.end);
+
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
   // Note: remember to fix the URL below.
@@ -17,7 +30,7 @@
     $.ajax({
       type: 'POST',
       data: formData,
-      url: 'FILL_ME_IN',
+      url: serverUrl,
       cache: false,
       contentType: false,
       processData: false,
