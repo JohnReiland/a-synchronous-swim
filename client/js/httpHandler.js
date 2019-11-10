@@ -11,8 +11,6 @@
     }//ready function will be executed after document elements are loaded.
    );
 
-
-
   const fetchSwimCommand = () => {
     $.ajax({
       type: 'GET',
