@@ -29,22 +29,37 @@ module.exports.router = (req, res, next = ()=>{}) => {
       //   res.end(generateRandom());
       // }
 
-      // if (req.url === '/background.jpg') {
-      //   fs.readFile(module.exports.backgroundImageFile, (err, data) => {
-      //     if (err) {
-      //       res.writeHead(404, headers);
-      //       res.end();
-      //     } else {
-      //       res.writeHead(200, headers);
-      //       res.write(data, 'binary');
-      //       res.end();
-      //     }
-      //   });
-      // }
-
-
-
+      if (req.url === '/background.jpg') {
+        fs.readFile(module.exports.backgroundImageFile, (err, data) => {
+          if (err) {
+            res.writeHead(404, headers);
+            res.end();
+          } else {
+            res.writeHead(200, headers);
+            res.write(data, 'binary');
+            res.end();
+          }
+        });
+      }
     }
+      if (req.method === 'POST') {
+        if (req.url === '/background.jpg') {
+          var imageFile = Buffer.alloc(0);
+          req.on('data', chunk => {
+            imageFile = Buffer.concat([imageFile, chunk]);
+          });
+
+          req.on('end', ()=> {
+            var imageData = multipart.getFile(imageFIle);
+            fs.writeFile(module.exports.backgroundImageFile, imageData, () => {
+              res.writeHead(201, headers);
+              resWrite(module.exports.backgroundImageFile);
+              res.end();
+            });
+          });
+        }
+      }
+
     if (req.method === 'OPTIONS') {
         res.writeHead(200, headers);
         res.end();
